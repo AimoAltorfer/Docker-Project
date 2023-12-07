@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Einfaches Ticket-System</title>
+  <style>
+    #ticketList {
+      margin-top: 20px;
+    }
+    .ticket {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+</style>
+</head>
+<body>
+
+  <h1>Einfaches Ticket-System</h1>
+
+  <form id="ticketForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <br>
+    
+    <label for="issue">Problem:</label>
+    <textarea id="issue" required></textarea>
+    <br>
+
+    <input type="submit" value="Ticket erstellen">
+  </form>
+
+  <div id="ticketList">
+    
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('ticketForm');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+  
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const issue = document.getElementById('issue').value;
+  
+        fetch('http://localhost:3000/tickets', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, issue }),
+        })
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          // Hier können Sie Code zum Aktualisieren der Benutzeroberfläche hinzufügen
+        })
+        .catch((error) => {
+          console.error('Fehler:', error);
+        });
+  
+        form.reset(); // Formular zurücksetzen
+      });
+    });
+  </script>
+  
+  
+
+
+<style>
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  h1 {
+    color: #333366;
+  }
+  form {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  label {
+    font-weight: bold;
+  }
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  input[type="submit"] {
+    background-color: #333366;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type="submit"]:hover {
+    background-color: #555599;
+  }
+  #ticketList {
+    margin-top: 20px;
+  }
+  .ticket {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+</style>
+
+
+
+</body>
+</html>
