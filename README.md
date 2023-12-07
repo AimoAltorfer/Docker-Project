@@ -25,13 +25,26 @@ Wechseln Sie in das Verzeichnis des geklonten Repositorys und führen Sie den fo
 ```bash
 docker-compose up -d
 ```
+3. **Aktualisierung des README.md**
 
-3. **Zugriff auf die Anwendung**  
+---
+
+#### Wichtiger Hinweis zur Konfiguration
+
+Bevor Sie das Projekt starten, ist es wichtig, den Pfad in der `docker-compose.yml` Datei anzupassen:
+
+- Unter `services > db > volumes` müssen Sie den Pfad zur Ihrer `init-db.sql` Datei aktualisieren:
+
+  ```yaml
+  volumes:
+    - "<IHR_PFAD>/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql"
+  ```
+4. **Zugriff auf die Anwendung**  
 Nach dem Start der Container können Sie auf die Webanwendung zugreifen:
 - Frontend: [http://localhost:8080](http://localhost:8080)
 - Backend: [http://localhost:3000](http://localhost:3000)
 
-4. **Überprüfen der laufenden Container**  
+5. **Überprüfen der laufenden Container**  
 Um zu überprüfen, ob alle Container ordnungsgemäß laufen, verwenden Sie:
 
 ```bash
@@ -39,12 +52,14 @@ docker-compose ps
 ```
 
 
-5. **Herunterfahren der Anwendung**  
+6. **Herunterfahren der Anwendung**  
 Zum Stoppen und Entfernen der Container, Netzwerke und Volumes, die von `docker-compose up` erstellt wurden, verwenden Sie:
 
 ```bash
 docker-compose down
 ```
+
+
 
 ## Zusätzliche Befehle
 
